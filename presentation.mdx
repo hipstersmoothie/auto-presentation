@@ -1,0 +1,211 @@
+export { notes as theme } from "mdx-deck/themes";
+
+# Taking the stress of out Releasing
+
+- Take you through my team's journey to automated releases
+- Showcase some of the leading tools
+- Share what my team came up with
+- Share some learnings from my experience with automated releases
+
+---
+
+# My Team's Journey
+
+- Release on my team used to be a full time job
+- Release marshal 🤠
+- Rotating responsibility every sprint
+
+---
+
+# 🤠 Release marshal 🤠
+
+- Hand calculate new release version (could easily go wrong)
+- Write a detailed changelog
+- Update all the correct channels
+
+---
+
+# Channels to Update
+
+- Email a certain list of developers
+- Create a GitHub release
+- Update the changelog
+- Connect all of the merged PRs with their jira tickets
+- Post a message to a special slack channel
+
+---
+
+# 😵 😵
+
+This was a tedious job that no-one ever wanted to do!
+
+- releases were infrequent
+- releases were stressful!
+
+---
+
+# 🔎 The search for a solution 🔍
+
+- we tried to find something that would fit out needs
+
+- The tools had to be able to post to all of our different channels
+- It had to be easy to use and not force developers to change the way they worked
+- It had to be able to work on GitHub enterprise
+
+---
+
+# 📦🚀 semantic-release
+
+> semantic-release automates the whole package release workflow including: determining the next version number, generating the release notes and publishing the package.
+
+---
+
+# Seems cool! How does it work?
+
+> semantic-release uses the commit messages to determine the type of changes in the codebase. Following formalized conventions for commit messages, semantic-release automatically determines the next semantic version number, generates a changelog and publishes the release.
+
+---
+
+# Bummer! 😔
+
+- This fact ended up being the thing that dissuaded us from using semantic-release
+- It enforces your commit messages using conventional-commits
+
+---
+
+## Why not enforce commit messages? 💬
+
+- hard to get large teams switch to do
+- hard for new-comers to use and get used to
+- inhibits outside contribution
+- struggling to commit is not fun
+
+---
+
+# There has to be a better way ‼️
+
+- We need a solution that can work for many different people with different developer workflows
+- As a maintainer I want an easy way to control the versioning
+
+---
+
+# 🏷️ GitHub Labels 🏷️
+
+- same strategy as semantic-release but using PR Labels
+
+1. Find semantic labels on PRs since the last release
+2. Calculate the version bump
+3. Release a new version with all the bells and whistles
+
+---
+
+# Disparate Solutions
+
+- Various different packages using this solution
+- Problems:
+  - vastly different and complex set ups
+  - some of the features we wanted but not all
+  - most didn't take into account monorepos
+  - many didn't work at all with github enterprise 😢
+
+---
+
+## Time to break out the Text Editor 🤓
+
+- we decided to make our own solution
+
+- GitHub labels based releases
+- had to do everything we needed in a release
+- had to work regardless of if it was a monorepo
+
+---
+
+# 👶 Growing Up 👨
+
+- v1: a collection of scripts
+- v2: a internal javascript npm package
+- v3: a public pluggable - typescript npm package
+
+---
+
+# 🏎️ auto 🏎️
+
+- a collection of useful CLI tools to automate releases
+- calculates versions using labels
+- make beautiful changelogs in CHANGELOG.MD
+- makes a github release
+- notifies all your preferred communication channels - write plugins for more
+
+---
+
+![Changelog Example](https://pbs.twimg.com/media/Dt3MxWkVsAAsSJh.jpg)
+
+---
+
+# Easy to use
+
+- slap a label on a PR for a release
+- all parts of auto can be used independently or at once
+- easy path:
+  - auto init
+  - auto create-labels
+  - auto shipit - runs the full release pipeline
+
+---
+
+# Support any platform
+
+- auto is pluggable so you can write plugins for different publishing platforms
+- we tested this by creating a Chrome Web Store plugin
+- ✅ fully re-usable tool and methodology!
+
+---
+
+# 🥅 Automated releases wins 🥅
+
+- New features and fixes are immediately available to users
+- All run from your continuous integration
+- Avoid doing all the work involved in a great release
+- Ability to do dozens of releases a day
+
+---
+
+# 🎖️ Forces you to break up your code 🎖️
+
+A release/changelog entry with every PR forces you to break up your changes into smaller PRs.
+
+More PRs === More detailed changelogs and easier to consumer releases
+
+---
+
+# ⏳ Release Granularity ⌛
+
+- Granularity between releases means you can find bugs easier
+- Your users can find a working version easier without reverting to something really old
+- make the version number closer to some form of "semantic reality".
+
+---
+
+# 💪 Confidence 💪
+
+- be sure that your release will go well
+- avoid the dread of releasing after months away
+- accelerate your workflow
+
+---
+
+# ✋ Drawbacks ✋
+
+- Can't merge multiple PRs at once
+- Less control over changelogs
+- PR Titles might now perfectly describe changes
+
+---
+
+# 💙 Thanks for your time! 💙
+
+I hope you all automate the releases of you NPM packages and beyond
+
+Give use some ⭐s at:
+
+https://github.com/intuit/auto

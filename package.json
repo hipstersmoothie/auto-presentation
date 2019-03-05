@@ -1,0 +1,20 @@
+{
+  "name": "auto-presentation",
+  "version": "0.0.0",
+  "description": "My presentation for automated releases",
+  "main": "index.js",
+  "source": "index.js",
+  "author": {
+    "name": "Andrew Lisowski",
+    "email": "lisowski54@gmail.com"
+  },
+  "scripts": {
+    "present": "mdx-deck presentation.mdx --port 3006",
+    "build": "mdx-deck build presentation.mdx -d build",
+    "release": "git config --global user.email 'lisowski54@gmail.com' && git config --global user.name 'Andrew Lisowski' && push-dir --dir=build --branch=gh-pages --verbose"
+  },
+  "devDependencies": {
+    "mdx-deck": "^1.10.0",
+    "push-dir": "^0.4.1"
+  }
+}
