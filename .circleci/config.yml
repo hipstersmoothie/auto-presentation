@@ -1,7 +1,7 @@
 version: 2
 
 defaults: &defaults
-  working_directory: ~/navi-presentation
+  working_directory: ~/auto-presentation
   docker:
     - image: circleci/node:latest-browsers
 
@@ -14,17 +14,17 @@ jobs:
           keys:
             # Find a cache corresponding to this specific package.json checksum
             # when this file is changed, this key will fail
-            - navi-presentation-{{ .Branch }}-{{ checksum "yarn.lock" }}-{{ checksum ".circleci/config.yml" }}
-            - navi-presentation-{{ .Branch }}-{{ checksum "yarn.lock" }}
-            - navi-presentation-{{ .Branch }}
+            - auto-presentation-{{ .Branch }}-{{ checksum "yarn.lock" }}-{{ checksum ".circleci/config.yml" }}
+            - auto-presentation-{{ .Branch }}-{{ checksum "yarn.lock" }}
+            - auto-presentation-{{ .Branch }}
             # Find the most recent cache used from any branch
-            - navi-presentation-master
-            - navi-presentation-
+            - auto-presentation-master
+            - auto-presentation-
       - run:
           name: Install Dependencies
           command: yarn install --frozen-lockfile
       - save_cache:
-          key: navi-presentation-{{ .Branch }}-{{ checksum "yarn.lock" }}-{{ checksum ".circleci/config.yml" }}
+          key: auto-presentation-{{ .Branch }}-{{ checksum "yarn.lock" }}-{{ checksum ".circleci/config.yml" }}
           paths:
             - node_modules
             - ~/.cache/yarn
@@ -37,7 +37,7 @@ jobs:
     <<: *defaults
     steps:
       - attach_workspace:
-          at: ~/navi-presentation
+          at: ~/auto-presentation
       - run:
           name: Build
           command: yarn build
@@ -50,7 +50,7 @@ jobs:
     <<: *defaults
     steps:
       - attach_workspace:
-          at: ~/navi-presentation
+          at: ~/auto-presentation
       - run:
           name: "Make sure we can commit to Intuit github"
           command: |
